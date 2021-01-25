@@ -25,7 +25,7 @@ class MusicaRepositorio extends AbstractRepositorio{
     }
 
     public function fetchall(){
-        return $this->getRepositorio()->fetchAll('SELECT * FROM musicas');
+        return $this->getRepositorio()->fetchAll('SELECT * FROM musicas ORDER BY nome');
     }
     
 }
