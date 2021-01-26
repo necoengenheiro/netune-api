@@ -37,9 +37,7 @@ class WorkspaceController extends Controller{
         return (new WorkspaceRepositorio())->fetchall();
     }
     
-    public function save($workspace){
-        $ws = $this->currentWorkspace();
-
+    public function save($ws){
         (new WorkspaceRepositorio())->clearMusicas($ws->id);
 
         for ($i = 0 ; $i < count($workspace->musicas); $i++) {
