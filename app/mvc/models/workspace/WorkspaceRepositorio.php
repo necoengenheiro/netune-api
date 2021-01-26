@@ -11,7 +11,7 @@ class WorkspaceRepositorio extends AbstractRepositorio{
     }
 
     public function insert($workspace){
-        $this->getRepositorio()->insert('workspaces', $workspace);
+        return $this->getRepositorio()->insert('workspaces', $workspace);
     }
 
     public function fetch($id){
