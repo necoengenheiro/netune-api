@@ -47,7 +47,18 @@ class WorkspaceRepositorio extends AbstractRepositorio{
     }
 
     public function fetchall(){
-        return $this->getRepositorio()->fetchAll('SELECT * FROM workspaces');
+        return $this->getRepositorio()->fetchAll('
+        SELECT w.*, u.*
+        FROM workspaces AS w
+        INNER JOIN users AS u ON u.id = w.userId
+        ORDER BY w.nome', [], [
+            'app\mvc\models\workspace\Workspace',
+            'app\mvc\models\user\User',
+        ], function($w, $u){
+            $w->user = $u;
+
+            return $w;
+        });
     }
     
 }
