@@ -32,6 +32,12 @@ class UserController extends Controller{
         return (new UserRepositorio())->fetchall();
     }
 
+    public function update($user){
+        (new UserRepositorio())->update($user);
+        
+        return $this;
+    }
+
     public function changeWorkspace($user){
         (new UserRepositorio())->updateWorkspace($user);
         return $user;

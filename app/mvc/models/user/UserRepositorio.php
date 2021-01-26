@@ -21,6 +21,14 @@ class UserRepositorio extends AbstractRepositorio{
         ]);
     }
 
+    public function update($user){
+        $this->getRepositorio()->update('users', array(
+            'id' => $user->id,
+            'nome' => $user->nome,
+            'avatar' => $user->avatar,
+        ));
+    }
+
     public function fetch($uuid){
         return $this->getRepositorio()->fetch('SELECT * FROM users WHERE uuid = :uuid', array(
             ':uuid' => $uuid
