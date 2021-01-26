@@ -14,6 +14,13 @@ class UserRepositorio extends AbstractRepositorio{
         return $this->getRepositorio()->insert('users', $user);
     }
 
+    public function updateWorkspace($user){
+        $this->getRepositorio()->update('users', [
+            'id' => $user->id,
+            'workspaceId' => $user->workspaceId,
+        ]);
+    }
+
     public function fetch($uuid){
         return $this->getRepositorio()->fetch('SELECT * FROM users WHERE uuid = :uuid', array(
             ':uuid' => $uuid
