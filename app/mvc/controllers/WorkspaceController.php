@@ -23,7 +23,7 @@ class WorkspaceController extends Controller{
     }
 
     private function currentWorkspace(){
-        return (new WorkspaceRepositorio())->fetch(1);;
+        return (new WorkspaceRepositorio())->fetch(1);
     }
 
     public function current(){
@@ -50,7 +50,10 @@ class WorkspaceController extends Controller{
     }
     
     public function get($id = 0){
-        return (new WorkspaceRepositorio())->fetch($id);
+        $ws = (new WorkspaceRepositorio())->fetch($id);
+        $ws->musicas = (new WorkspaceRepositorio())->fetchMusicas($ws->id);
+        
+        return $ws;
     }
 
 }
