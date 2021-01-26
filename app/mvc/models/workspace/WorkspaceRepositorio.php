@@ -10,6 +10,10 @@ class WorkspaceRepositorio extends AbstractRepositorio{
         parent::__construct('app\mvc\models\workspace\Workspace');
     }
 
+    public function insert($workspace){
+        $this->getRepositorio()->insert('workspaces', $workspace);
+    }
+
     public function fetch($id){
         return $this->getRepositorio()->fetch('SELECT * FROM workspaces WHERE id = :id', array(
             ':id' => $id

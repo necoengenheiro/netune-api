@@ -18,8 +18,8 @@ class WorkspaceController extends Controller{
         // $this->filter->register('*', array());
     }
 
-    public function create(){
-        
+    public function insert($workspace){
+        return (new WorkspaceRepositorio())->insert($workspace);
     }
 
     private function currentWorkspace(){
