@@ -40,8 +40,8 @@ class WorkspaceController extends Controller{
     public function save($ws){
         (new WorkspaceRepositorio())->clearMusicas($ws->id);
 
-        for ($i = 0 ; $i < count($workspace->musicas); $i++) {
-            (new WorkspaceRepositorio())->insertMusica($ws->id, $workspace->musicas[$i]->id);
+        for ($i = 0 ; $i < count($ws->musicas); $i++) {
+            (new WorkspaceRepositorio())->insertMusica($ws->id, $ws->musicas[$i]->id);
         }
 
         return array();
