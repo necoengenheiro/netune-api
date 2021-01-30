@@ -20,6 +20,18 @@ class WorkspaceRepositorio extends AbstractRepositorio{
         ));
     }
 
+    public function delete($workspaceId){
+        $this->getRepositorio()->delete('workspaces', $workspaceId);
+        
+        $this->getRepositorio()->execute('UPDATE users SET workspaceId = 1 WHERE workspaceId = :wid', [
+            ':wid' => $workspaceId
+        ]);
+
+        $this->getRepositorio()->execute('DELETE FROM workspace_musica WHERE workspaceId = :wid',  [
+            ':wid' => $workspaceId
+        ]);
+    }
+
     public function insertMusica($workspaceId, $musicaId){
         $this->getRepositorio()->insert('workspace_musica', array(
             'workspaceId' => $workspaceId,

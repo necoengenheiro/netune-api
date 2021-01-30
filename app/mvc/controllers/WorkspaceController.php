@@ -10,6 +10,11 @@ use atare\turim\lib\Wrapper;
 use app\mvc\models\workspace\Workspace;
 use app\mvc\models\workspace\WorkspaceRepositorio;
 
+use app\mvc\models\user\User;
+use app\mvc\models\user\UserRepositorio;
+
+use \Exception;
+
 class WorkspaceController extends Controller{
 
     public function __construct(){
@@ -31,6 +36,22 @@ class WorkspaceController extends Controller{
         $ws->musicas = (new WorkspaceRepositorio())->fetchMusicas($ws->id);
 
         return $ws;
+    }
+
+    public function delete($workspace = null){
+        $user = (new UserRepositorio())->fetch($this->request->get->query('userid'));
+        if($user == false){
+            throw new Exception("Você não possui permissão para remover este workspace", 1);
+        }
+        
+        $workspace = (new WorkspaceRepositorio())->fetch($workspace->id);
+        if($workspace->userId == $userid){
+            throw new Exception("Você não possui permissão para remover este workspace", 1);
+        }
+
+        (new WorkspaceRepositorio())->delete($workspace->id);
+
+        return [];
     }
     
     public function all(){
