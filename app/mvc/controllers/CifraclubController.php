@@ -15,6 +15,21 @@ class CifraclubController extends Controller{
         // $this->filter->register('*', array());
     }
 
+    public function search($query){
+        $query = urlencode($query);
+        $content = file_get_contents("https://studiosolsolr-a.akamaihd.net/cc/h2/?q=$query");
+        $response = Wrapper::ok([
+            'numFound' => 0
+        ]);
+
+        if(strlen($content) > 5){
+            $json = json_decode(substr($content, 1, strlen($content) - 3));
+            $response = Wrapper::ok($json->response);
+        }
+
+        return $response;
+    }
+
     public function get($url){
         try {
             $html = file_get_contents($url);
