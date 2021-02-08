@@ -25,7 +25,9 @@ class UserController extends Controller{
     }
 
     public function get($uuid){
-        return (new UserRepositorio())->fetch($uuid);
+        $user = (new UserRepositorio())->fetch($uuid);;
+        if($user == false) return Wrapper::error('Usuário não existe');
+        return $user;
     }
 
     public function all(){
