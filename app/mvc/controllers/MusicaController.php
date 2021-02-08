@@ -27,8 +27,15 @@ class MusicaController extends Controller{
     public function get($id = 0){
         return (new MusicaRepositorio())->fetch($id);
     }
-
+    
     public function update($musica){
+        $userid = $this->request->get->query('userid');
+        $current = (new MusicaRepositorio())->fetch($musica->id);
+
+        if($current->createdby != $userid){
+            return Wrapper::error('Somente o criador da cifra pode altera-la.');
+        }
+
         (new MusicaRepositorio())->update($musica);
 
         return array();
