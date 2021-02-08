@@ -19,6 +19,7 @@ class MusicaController extends Controller{
     }
 
     public function insert($musica){
+        $musica->createdby = $this->request->get->query('userid');
         (new MusicaRepositorio())->insert($musica);
 
         return array();
