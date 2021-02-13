@@ -33,9 +33,9 @@ class MusicaController extends Controller{
         $userid = $this->request->get->query('userid');
         $current = (new MusicaRepositorio())->fetch($musica->id);
 
-        if($current->createdby != $userid){
-            return Wrapper::error('Somente o criador da cifra pode altera-la.');
-        }
+        // if($current->createdby != $userid){
+        //     return Wrapper::error('Somente o criador da cifra pode altera-la.');
+        // }
 
         (new MusicaRepositorio())->update($musica);
 
