@@ -18,8 +18,12 @@ class Request{
         $this->post = new Post();
     }
 
+    public function method(){
+        return $_SERVER['REQUEST_METHOD'];
+    }
+
     public function isPost(){
-        return $_SERVER['REQUEST_METHOD'] === 'POST';
+        return $this->method() === 'POST';
     }
 
     public function isAjax(){

@@ -15,7 +15,7 @@ class MusicaController extends Controller{
     public function __construct(){
         parent::__construct();
 
-        // $this->filter->register('*', array());
+        $this->filter->register('*', array('cors'));
     }
 
     public function insert($musica){
