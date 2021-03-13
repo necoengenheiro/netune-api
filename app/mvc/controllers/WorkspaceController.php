@@ -62,7 +62,7 @@ class WorkspaceController extends Controller{
         (new WorkspaceRepositorio())->clearMusicas($ws->id);
 
         for ($i = 0 ; $i < count($ws->musicas); $i++) {
-            (new WorkspaceRepositorio())->insertMusica($ws->id, $ws->musicas[$i]->id);
+            (new WorkspaceRepositorio())->insertMusica($ws->id, $ws->musicas[$i]->id, $i);
         }
 
         return array();

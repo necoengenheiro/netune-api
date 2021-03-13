@@ -32,10 +32,11 @@ class WorkspaceRepositorio extends AbstractRepositorio{
         ]);
     }
 
-    public function insertMusica($workspaceId, $musicaId){
+    public function insertMusica($workspaceId, $musicaId, $position = 0){
         $this->getRepositorio()->insert('workspace_musica', array(
             'workspaceId' => $workspaceId,
-            'musicaId' => $musicaId
+            'musicaId' => $musicaId,
+            'position' => $position
         ));
     }
 
@@ -54,10 +55,11 @@ class WorkspaceRepositorio extends AbstractRepositorio{
 
     public function fetchMusicas($workspaceId){
         return $this->getRepositorio()->fetchAll('
-        SELECT musicas.*
+        SELECT musicas.*, wm.position
         FROM workspace_musica AS wm
         INNER JOIN musicas ON musicas.id = wm.musicaId
-        WHERE wm.workspaceId = :id AND wm.musicaId = musicas.id', array(
+        WHERE wm.workspaceId = :id AND wm.musicaId = musicas.id
+        ORDER BY wm.position', array(
             ':id' => $workspaceId
         ));
     }
