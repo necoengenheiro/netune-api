@@ -15,7 +15,15 @@ class MusicaRepositorio extends AbstractRepositorio{
     }
 
     public function update($musica){
-        $this->getRepositorio()->update('musicas', $musica);
+        $this->getRepositorio()->update('musicas', array(
+            'id' => $musica->id,
+            'nome' => $musica->nome,
+            'tom' => $musica->tom,
+            'lyrics' => $musica->lyrics,
+            'versao' => $musica->versao,
+            'tag' => $musica->tag,
+            'youtube' => $musica->youtube,
+        ));
     }
 
     public function fetch($id){
